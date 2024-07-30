@@ -1,9 +1,9 @@
-# hh
+# 11
   
 
 ## Description
 
-jjj
+2
 
 
 ## Table of Contents (Optional)
@@ -16,7 +16,7 @@ jjj
 
 ## Installation
 
-lll
+5
 
 ## Usage
 
@@ -29,28 +29,41 @@ To add a screenshot, create an "assets/images" folder in your repository and upl
 
 ## Credits
 
-ggg
+6
 ## License
 
-The last section of a high-quality README file is the license. This lets other developers know what they can and cannot do with your project. If you need help choosing a license, refer to [https://choosealicense.com/](https://choosealicense.com/).
+## License
 
----
+[![License](https://img.shields.io/badge/License--blue.svg)](https://opensource.org/licenses/)
 
-🏆 The previous sections are the bare minimum, and your project will ultimately determine the content of this document. You might also want to consider adding the following sections.
+This application is covered under the  license.
+
+
+
+
 
 ## Badges
 
 
 
-Badges aren't necessary, per se, but they demonstrate street cred. Badges let other developers know that you know what you're doing. Check out the badges hosted by [shields.io](https://shields.io/). You may not understand what they all represent now, but you will in time.
+![Static Badge](https://img.shields.io/badge/https%3A%2F%2Fimg.shields.io%2Fbadge%2FREADME-Generator-brightgreen)
+
 
 ## Features
 
-hhh
+7
 
 ## How to Contribute
 
 If you created an application or package and would like other developers to contribute it, you can include guidelines for how to do so. The [Contributor Covenant](https://www.contributor-covenant.org/) is an industry standard, but you can always write your own if you'd prefer.
 
+## Email
+9
+
+## Github
+
+3
+
+
 ## Tests
-hhh
+8
