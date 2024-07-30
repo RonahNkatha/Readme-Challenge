@@ -1,7 +1,7 @@
 // TODO: Include packages needed for this application
 import inquirer from "inquirer";
 import fs from "fs";
-// import path from "path";
+import path from "path";
 
 // TODO: Create an array of questions for user input
 const questions = [
@@ -14,18 +14,24 @@ const questions = [
     type: "input",
     name: "description",
     message: "What's your description?",
+  },
+  {
+    type: "input",
+    name: "github",
+    message: "What's your github handle?"
     },
-//     {
-//         type: "checkbox",
-//         name: "license",
-//         message: "Please select a license",
-//         choices: ["MIT", "None", "APACHE2.0"],
-// },
-//   {
-//     type: "input",
-//     name: "table_of_content",
-//     message: "What is your table of content?",
-//   },
+    {
+        type: "checkbox",
+        name: "license",
+        message: "Please select a license",
+        choices: ["MIT", "None", "APACHE2.0"],
+  },
+
+  {
+    type: "input",
+    name: "table_of_content",
+    message: "What is your table of content?",
+  },
 
   {
     type: "input",
@@ -48,10 +54,18 @@ const questions = [
         name: "tests",
         message: "What test do you run?"
   },
+  {
+    type: "input",
+    name: "email",
+    message: "What's your email address?"
+    }
 
 
-  //   },
 ];
+
+// inquirer.prompt(questions).then(answers => {
+//   console.log('Selected License:', answers.license);
+// });
 
 // TODO: Create a function to write README file
 function writeToFile(fileName, text) {
@@ -121,17 +135,16 @@ To add a screenshot, create an "assets/images" folder in your repository and upl
 ${answers.credits}
 ## License
 
-The last section of a high-quality README file is the license. This lets other developers know what they can and cannot do with your project. If you need help choosing a license, refer to [https://choosealicense.com/](https://choosealicense.com/).
+${renderLicense(answers.license)}
 
----
 
-🏆 The previous sections are the bare minimum, and your project will ultimately determine the content of this document. You might also want to consider adding the following sections.
 
 ## Badges
 
 
 
-Badges aren't necessary, per se, but they demonstrate street cred. Badges let other developers know that you know what you're doing. Check out the badges hosted by [shields.io](https://shields.io/). You may not understand what they all represent now, but you will in time.
+![Static Badge](https://img.shields.io/badge/https%3A%2F%2Fimg.shields.io%2Fbadge%2FREADME-Generator-brightgreen)
+
 
 ## Features
 
@@ -141,8 +154,35 @@ ${answers.features}
 
 If you created an application or package and would like other developers to contribute it, you can include guidelines for how to do so. The [Contributor Covenant](https://www.contributor-covenant.org/) is an industry standard, but you can always write your own if you'd prefer.
 
+## Email
+${answers.email}
+
+## Github
+
+${answers.github}
+
+
 ## Tests
 ${answers.tests}
 `
   return text;
+}
+
+
+  
+function renderLicense(license) {
+  let licenseText = "";
+
+  // Generate the license badge based on the selected license
+  let licenseBadge = `[![License](https://img.shields.io/badge/License-${license}-blue.svg)](https://opensource.org/licenses/${license})`;
+
+  // Generate the license notice text based on the selected license
+  let licenseNotice = `This application is covered under the ${license} license.`;
+
+  // Generate the license section with badge and notice
+  licenseText += `## License\n\n`;
+  licenseText += `${licenseBadge}\n\n`;
+  licenseText += `${licenseNotice}\n\n`;
+
+  return licenseText;
 }
