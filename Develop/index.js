@@ -2,6 +2,7 @@
 import inquirer from "inquirer";
 import fs from "fs";
 import path from "path";
+import { log } from "console";
 
 // TODO: Create an array of questions for user input
 const questions = [
@@ -18,19 +19,24 @@ const questions = [
   {
     type: "input",
     name: "github",
-    message: "What's your github handle?"
-    },
-    {
-        type: "checkbox",
-        name: "license",
-        message: "Please select a license",
-        choices: ["MIT", "None", "APACHE2.0"],
+    message: "What's your github handle?",
+  },
+  {
+    type: "list",
+    name: "license",
+    message: "Please select a license",
+    choices: ["MIT", "None", "APACHE2.0"],
   },
 
   {
     type: "input",
     name: "table_of_content",
     message: "What is your table of content?",
+  },
+  {
+    type: "input",
+    name: "usage",
+    message: "How to use your project?",
   },
 
   {
@@ -46,21 +52,24 @@ const questions = [
   },
   {
     type: "input",
+    name: "contribution",
+    message: "How to contribute?",
+  },
+  {
+    type: "input",
     name: "features",
     message: "What are your features",
-    },
-    {
-        type: "input",
-        name: "tests",
-        message: "What test do you run?"
+  },
+  {
+    type: "input",
+    name: "tests",
+    message: "What test do you run?",
   },
   {
     type: "input",
     name: "email",
-    message: "What's your email address?"
-    }
-
-
+    message: "What's your email address?",
+  },
 ];
 
 // inquirer.prompt(questions).then(answers => {
@@ -73,7 +82,7 @@ function writeToFile(fileName, text) {
     if (err) {
       console.error(err);
     } else {
-    //   file written successfully
+      //   file written successfully
     }
   });
 }
@@ -86,7 +95,7 @@ function init() {
       console.log(answers);
       // Use user feedback for... whatever!!
       const text = generateReadMeText(answers);
-      console.log(text);
+      // console.log(text);
       writeToFile("./README.md", text);
     })
     .catch((error) => {
@@ -103,11 +112,11 @@ init();
 function generateReadMeText(answers) {
   const text = `# ${answers.title}
   
+  ${renderLicense(answers.license)}
 
 ## Description
 
 ${answers.description}
-
 
 ## Table of Contents (Optional)
 
@@ -123,28 +132,19 @@ ${answers.installation}
 
 ## Usage
 
-Provide instructions and examples for use. Include screenshots as needed.
-
-To add a screenshot, create an "assets/images" folder in your repository and upload your screenshot to it. Then, using the relative filepath, add it to your README using the following syntax:
-
-    md
-    ![alt text](assets/images/screenshot.png)
+${answers.usage}
 
 ## Credits
 
 ${answers.credits}
+
 ## License
 
 ${renderLicense(answers.license)}
 
-
-
 ## Badges
 
-
-
-![Static Badge](https://img.shields.io/badge/https%3A%2F%2Fimg.shields.io%2Fbadge%2FREADME-Generator-brightgreen)
-
+![Static Badge](https://img.shields.io/badge/README-Generator-brightgreen)
 
 ## Features
 
@@ -152,25 +152,25 @@ ${answers.features}
 
 ## How to Contribute
 
-If you created an application or package and would like other developers to contribute it, you can include guidelines for how to do so. The [Contributor Covenant](https://www.contributor-covenant.org/) is an industry standard, but you can always write your own if you'd prefer.
+${answers.contribution}
 
 ## Email
+
 ${answers.email}
 
 ## Github
 
-${answers.github}
-
+ [Find me on github](https://github.com/${answers.github})
 
 ## Tests
+
 ${answers.tests}
-`
+`;
   return text;
 }
 
-
-  
 function renderLicense(license) {
+  console.log(license);
   let licenseText = "";
 
   // Generate the license badge based on the selected license
@@ -180,7 +180,7 @@ function renderLicense(license) {
   let licenseNotice = `This application is covered under the ${license} license.`;
 
   // Generate the license section with badge and notice
-  licenseText += `## License\n\n`;
+  // licenseText += `## License\n\n`;
   licenseText += `${licenseBadge}\n\n`;
   licenseText += `${licenseNotice}\n\n`;
 
